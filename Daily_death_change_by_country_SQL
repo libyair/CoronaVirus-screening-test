@@ -1,0 +1,7 @@
+create table deaths_total.deaths_change_SQL AS 
+select 	
+    Country_Name, 
+    Date,
+    Death_Toll-lag(Death_Toll,1) over ( partition by Country_Name order by Date) as death_daily_change 
+from deaths_total.death_tolls
+order by Country_Name, Date
